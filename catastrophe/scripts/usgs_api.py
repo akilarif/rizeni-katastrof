@@ -67,7 +67,7 @@ while(True):
         #print(data)
     earthquake_data = []
     earthquake_list = data["features"]
-    print(earthquake_list[0])
+    #print(earthquake_list[0])
     earthquake_list.append({'properties': {'updated': 1520702073040, 'mmi': None, 'type': 'earthquake', 'net': 'us', 'tsunami': 0, 'cdi': None, 'url': 'https://earthquake.usgs.gov/earthquakes/eventpage/us1000d2sx', 'ids': ',us1000d2sx,', 'gap': 121, 'time': 1520698713230, 'place': '81km SSW of Pagan, Northern Mariana Islands', 'mag': 4, 'types': ',geoserve,origin,phase-data,', 'title': 'M 4.0 - 81km SSW of Pagan, Northern Mariana Islands', 'detail': 'https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=us1000d2sx&format=geojson', 'nst': None, 'sig': 246, 'alert': None, 'rms': 0.63, 'dmin': 2.214, 'magType': 'mb', 'status': 'reviewed', 'felt': None, 'code': '1000d2sx', 'sources': ',us,', 'tz': 600}, 'geometry': {'coordinates': [77.8880002, 29.8542626, 362.32], 'type': 'Point'}, 'type': 'Feature', 'id': 'us1000d2sx'})
     for each_quake in earthquake_list:
         temp_tuple = (each_quake["properties"]["mag"], each_quake["properties"]["time"], each_quake["geometry"]["coordinates"])
@@ -78,8 +78,12 @@ while(True):
             location = geolocator.geocode(u.location)
             dest=(location.latitude, location.longitude)
             distance=vincenty(source,dest).km
-            if(distance<100 and u.email!=None):
-                send_email(u.email,each_quake["properties"]["mag"],quake_time,source,each_quake["geometry"]["coordinates"][2],distance)
+            if(distance<100):
+                 if(u.email!=None):     
+                     send_email(u.email,each_quake["properties"]["mag"],quake_time,source,each_quake["geometry"]["coordinates"][2],distance)
+                 body="There was earthquake of "+"magnitude "+str(each_quake["properties"]["mag"])+" at "+str(quake_time)+" at distance of "+str(distance)+"km from your location."
+                 u.msg=body
+                 u.save()
         earthquake_data.append(temp_tuple)
     time.sleep(120)
 #tmp=User.objects.all()
