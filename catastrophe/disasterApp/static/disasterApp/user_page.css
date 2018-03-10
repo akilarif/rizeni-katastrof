@@ -8,4 +8,7 @@ body {
 	float: right;
 }
 
+#map {
+    height: 100%;
+}
 
