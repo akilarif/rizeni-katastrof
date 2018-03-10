@@ -30,31 +30,36 @@
 
           <div class="tab-content">
             <div id="nearby_services" class="tab-pane fade in active">
-              <h2>Nearby Services</h2>
-              {% for service, place in places.items %}
-                {% if service == "hospital" %}
-                <h3>Hospital</h3>
-                {% elif service == "fire_station" %}
-                <h3>Fire Station</h3>
-                {% elif service == "gas_station" %}
-                <h3>Gas Station</h3>
-                {% elif service == "atm" %}
-                <h3>ATM</h3>
-                {% elif service == "police" %}
-                <h3>Police Station</h3>
-                {% elif service == "pharmacy" %}
-                <h3>Pharmacy</h3>
-                {% endif %}
-              <ol class="ordered_list">
-                {% for place_tuple in place %}
-                    <li>{% for element in place_tuple %}</li>
-                        <ul>
-                            <li>{{ element }}</li>
-                        </ul>
+                <div id ="content">
+                      <h2>Nearby Services</h2>
+                      {% for service, place in places.items %}
+                        {% if service == "hospital" %}
+                        <h3>Hospital</h3>
+                        {% elif service == "fire_station" %}
+                        <h3>Fire Station</h3>
+                        {% elif service == "gas_station" %}
+                        <h3>Gas Station</h3>
+                        {% elif service == "atm" %}
+                        <h3>ATM</h3>
+                        {% elif service == "police" %}
+                        <h3>Police Station</h3>
+                        {% elif service == "pharmacy" %}
+                        <h3>Pharmacy</h3>
+                        {% endif %}
+                      <ol class="ordered_list">
+                        {% for place_tuple in place %}
+                            <li>{% for element in place_tuple %}</li>
+                                <ul>
+                                    <li>{{ element }}</li>
+                                </ul>
+                                {% endfor %}
                         {% endfor %}
-                {% endfor %}
-              </ol>
-              {% endfor %}
+                      </ol>
+                      {% endfor %}
+                </div>
+                <h3>My Google Maps Demo</h3>
+                <div id="map" style="width:100%;height:400px;"></div> 
+                <!-- If style attribute is not present, then the map is not displayed-->
             </div>
             <div id="message_board" class="tab-pane fade">
               <h2>Message Board</h2>
@@ -81,17 +86,41 @@
 	</form>
     {% endif %}
 
-  <script>
+   
+       <script>
+      var map;
+      initMap = function() {
+      map = new google.maps.Map(document.getElementById('map'), 
+        {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+        });
+      }
+    </script>
+    <script>
+      
       $(document).ready(function(){
+      
           $(".nav-tabs a").click(function(){
               $(this).tab('show');
+              
           });
           $('.nav-tabs a').on('shown.bs.tab', function(event){
               var x = $(event.target).text();         // active tab
               var y = $(event.relatedTarget).text();  // previous tab
               $(".act span").text(x);
               $(".prev span").text(y);
-          });
+          }); 
+         
+      
+      /*}, initMap = function(){
+        var mapProp= {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+        };
+         var map = new google.maps.Map($("#map")[0], mapProp);*/
+         
+      
       });
 
       $('.ordered_list').each(function(){
@@ -99,8 +128,13 @@
         if(blankCheck.length == 0) {
           $(this).html('<p>None found</p>');
         }  
+      
       });
-  </script>
-
+     
+  
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2elfNn2ccUpOz2WQrj81nQM5G3mA8rXo&callback=initMap" async defer>
+    </script>
+  
 {% endblock %}
 
