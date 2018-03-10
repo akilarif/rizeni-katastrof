@@ -1,11 +1,9 @@
 {% extends "disasterApp/layout.html" %}
 
 {% block content %}
-    Username: <input type="text" name="username"><br>
-  	<br>
-  	Password: <input type="text" name="password"><br>
-  	<br>
   	<form action="/user_page/" method="post">
+  		<p>Username: <input type="text" name="username"></p>
+  		<p>Password: <input type="text" name="password"></p>
   		<button name="log_in" type="submit">Log In</button>
   	</form>
   	<br>
