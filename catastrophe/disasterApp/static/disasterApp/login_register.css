@@ -9,5 +9,10 @@ h1 a {
 }
 
 body p {
-    color: #828282
+    color: #828282;
+}
+
+.btn {
+	width: 80px;
+	display: inline-block;
 }

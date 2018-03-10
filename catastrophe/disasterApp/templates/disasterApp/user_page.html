@@ -3,18 +3,49 @@
 {% load staticfiles %}
 
 {% block head %}
+    <title>Rizeni Katastrof</title>
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/user_page.css' %}">
-	<title>Rizeni Katastroph</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
 
 {% block body %}
     {% if user.is_authenticated %}
         
-        {% for service, place in places.items %}
-            <h3>{{ service }}</h3>
-            <ol>
+        <form action="/logout/" method="POST">
+            {% csrf_token %}
+            <button type = submit>Logout</a></p>
+        </form>
+
+        <div class="container">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#nearby_services">Nearby Services</a></li>
+            <li><a href="#message_board">Message Board</a></li>
+            <li><a href="#donation_board">Donation Board</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="nearby_services" class="tab-pane fade in active">
+              <h2>Nearby Services</h2>
+              {% for service, place in places.items %}
+                {% if service == "hospital" %}
+                <h3>Hospital</h3>
+                {% elif service == "fire_station" %}
+                <h3>Fire Station</h3>
+                {% elif service == "gas_station" %}
+                <h3>Gas Station</h3>
+                {% elif service == "atm" %}
+                <h3>ATM</h3>
+                {% elif service == "police" %}
+                <h3>Police Station</h3>
+                {% elif service == "pharmacy" %}
+                <h3>Pharmacy</h3>
+                {% endif %}
+              <ol class="ordered_list">
                 {% for place_tuple in place %}
                     <li>{% for element in place_tuple %}</li>
                         <ul>
@@ -22,13 +53,20 @@
                         </ul>
                         {% endfor %}
                 {% endfor %}
-            </ol>
-        {% endfor %}
-        
-        <form action="/logout/" method="POST">
-            {% csrf_token %}
-            <button type = submit>Logout</a></p>
-        </form>
+              </ol>
+              {% endfor %}
+            </div>
+            <div id="message_board" class="tab-pane fade">
+              <h2>Message Board</h2>
+              <p>message</p>
+            </div>
+            <div id="donation_board" class="tab-pane fade">
+              <h2>Donation Board</h2>
+              <p>donation</p>
+            </div>
+          </div>
+        </div>
+
     {% else %}
   	<form method="POST">
       	{% csrf_token %}
@@ -42,5 +80,27 @@
   		<button name="register" type="submit">Register</button>
 	</form>
     {% endif %}
+
+  <script>
+      $(document).ready(function(){
+          $(".nav-tabs a").click(function(){
+              $(this).tab('show');
+          });
+          $('.nav-tabs a').on('shown.bs.tab', function(event){
+              var x = $(event.target).text();         // active tab
+              var y = $(event.relatedTarget).text();  // previous tab
+              $(".act span").text(x);
+              $(".prev span").text(y);
+          });
+      });
+
+      $('.ordered_list').each(function(){
+        var blankCheck = $(this).html().trim();
+        if(blankCheck.length == 0) {
+          $(this).html('<p>None found</p>');
+        }  
+      });
+  </script>
+
 {% endblock %}
 
