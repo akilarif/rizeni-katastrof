@@ -5,22 +5,32 @@
 {% block head %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/login_register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/user_page.css' %}">
 	<title>Rizeni Katastroph</title>
 {% endblock %}
 
 {% block body %}
-    <h1> <a href="">Welcome to Rezini Katastrof </a> </h1>
+    {% if user.is_authenticated %}
+        {% if not user.profile_completed %}
+            
+        {% endif %}
+        <p>hello</p>
+        <p>welcome {{ user.username }}</p>
+        <form action="/logout/" method="POST">
+            <button type = submit>Logout</a></p>
+        </form>
+    {% else %}
   	<form method="POST">
       	{% csrf_token %}
   		<p>Username: <input type="text" name="username"></p>
   		<p>Password: <input type="password" name="password"></p>
-  		<button name="log_in" type="submit" class="btn">Log In</button>
+  		<button name="log_in" type="submit">Log In</button>
   	</form>
   	<br>
   	<form action="/register/" method="POST">
       	{% csrf_token %}
-  		<button name="register" type="submit" class="btn">Register</button>
+  		<button name="register" type="submit">Register</button>
 	</form>
-    
+    {% endif %}
 {% endblock %}
+

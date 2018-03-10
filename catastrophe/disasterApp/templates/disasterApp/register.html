@@ -1,8 +1,17 @@
 {% extends "disasterApp/layout.html" %}
 
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/register.css' %}">
+	<title>Rizeni Katastroph</title>
+{% endblock %}
+
 {% block body %}
     <form method="POST">
         {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn">Submit</button>
     </form>
 {% endblock %}
