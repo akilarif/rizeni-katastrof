@@ -6,21 +6,25 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/login_register.css' %}">
-	<title>Rizeni Katastroph</title>
+	<title>Rizeni Katastrof</title>
 {% endblock %}
 
 {% block body %}
-    <h1> <a href="">Welcome to Rezini Katastrof </a> </h1>
+    <center>
+    <h1> <a href="">Welcome to Rizeni Katastrof </a> </h1>
+    <br><br>
   	<form method="POST">
       	{% csrf_token %}
   		<p>Username: <input type="text" name="username"></p>
   		<p>Password: <input type="password" name="password"></p>
+      <br>
   		<button name="log_in" type="submit" class="btn">Log In</button>
   	</form>
   	<br>
   	<form action="/register/" method="POST">
       	{% csrf_token %}
   		<button name="register" type="submit" class="btn">Register</button>
-	</form>
+    </form>
+  </center>
     
 {% endblock %}

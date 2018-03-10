@@ -5,6 +5,10 @@ from django.http import HttpResponseRedirect
 from django import forms
 #from .forms import UserRegistrationForm
 from .forms import SignUpForm
+import urllib.request
+import json
+
+
 
 
 # Create your views here.
@@ -12,7 +16,23 @@ def login_register(request):
     return render(request, 'disasterApp/login_register.html', {})
 
 def user_page(request):
-	return render(request, 'disasterApp/user_page.html', {})
+    location = (29.8543, 77.8880)
+    location_str = str(location[0]) + "," + str(location[1])
+    places = {}
+    services = ["hospital", "pharmacy", "police", "atm", "fire_station", "gas_station"]
+    for service in services:
+        place = []
+        url = ("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + location_str +
+                "&radius=500&type=" + service + "&key=AIzaSyDbh2MphtWNNOPKdhueje18_9oebLZFl4A")
+        with urllib.request.urlopen(url) as u:
+            result = json.loads(u.read().decode())
+            place_objs = result["results"]
+            for place_obj in place_objs:
+                place_tuple = (place_obj["name"], place_obj["vicinity"], place_obj["geometry"]["location"])
+                place.append(place_tuple)
+            places[service] = place
+    return render(request, 'disasterApp/user_page.html', {"places": places})
+	
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -36,26 +56,6 @@ def register(request):
     return render(request, 'disasterApp/register.html', {'form': form})
 
 
-"""
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            userObj = form.cleaned_data
-            name=userObj['name']
-            username = userObj['username']
-            email =  userObj['email']
-            password =  userObj['password']
-            emergency_contact_name=userObj['emergency_contact_name']
-            emergency_contact_email=userObj['emergency_contact_email']
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-                User.objects.create_user(username, email, password)
-                user = authenticate(username = username, password = password)
-                login(request, user)
-                return HttpResponseRedirect('/')
-            else:
-                raise forms.ValidationError('Looks like a username with that username or email already exists')
-    else:
-        form = UserRegistrationForm()
-    return render(request, 'disasterApp/register.html', {'form' : form})
-"""
+
+
+
