@@ -1,7 +1,8 @@
 {% extends "disasterApp/layout.html" %}
 
 {% block content %}
-  	<form action="/user_page/" method="post">
+  	<form method="POST">
+      	{% csrf_token %}
   		<p>Username: <input type="text" name="username"></p>
   		<p>Password: <input type="text" name="password"></p>
   		<button name="log_in" type="submit">Log In</button>

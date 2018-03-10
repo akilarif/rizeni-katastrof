@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from . import views
+from django.contrib.auth import views as auth_views
 urlpatterns = [
-    url(r'^$', views.login_register, name='login_register'),
+    url(r'^$', auth_views.login, {'template_name': 'disasterApp/login_register.html'}),
     url(r'^user_page/', views.user_page, name='user_page'),
     url(r'^register/', views.register, name='register'),
 ]
