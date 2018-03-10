@@ -30,29 +30,29 @@
 
           <div class="tab-content">
             <div id="nearby_services" class="tab-pane fade in active">
-                <div id ="content">
-                      <h2>Nearby Services</h2>
-                      {% for service, place in places.items %}
-                        {% if service == "hospital" %}
-                        <h3>Hospital</h3>
-                        {% elif service == "fire_station" %}
-                        <h3>Fire Station</h3>
-                        {% elif service == "gas_station" %}
-                        <h3>Gas Station</h3>
-                        {% elif service == "atm" %}
-                        <h3>ATM</h3>
-                        {% elif service == "police" %}
-                        <h3>Police Station</h3>
-                        {% elif service == "pharmacy" %}
-                        <h3>Pharmacy</h3>
-                        {% endif %}
-                      <ol class="ordered_list">
-                        {% for place_tuple in place %}
-                            <li>{% for element in place_tuple %}</li>
-                                <ul>
-                                    <li>{{ element }}</li>
-                                </ul>
-                                {% endfor %}
+
+              <h2>Nearby Services</h2>
+              <br>
+              {% for service, place in places.items %}
+                {% if service == "hospital" %}
+                <h3>Hospital</h3>
+                {% elif service == "fire_station" %}
+                <h3>Fire Station</h3>
+                {% elif service == "gas_station" %}
+                <h3>Gas Station</h3>
+                {% elif service == "atm" %}
+                <h3>ATM</h3>
+                {% elif service == "police" %}
+                <h3>Police Station</h3>
+                {% elif service == "pharmacy" %}
+                <h3>Pharmacy</h3>
+                {% endif %}
+              <ol class="ordered_list">
+                {% for place_tuple in place %}
+                    <li>{% for element in place_tuple %}</li>
+                        <ul>
+                            <li>{{ element }}</li>
+                        </ul>
                         {% endfor %}
                       </ol>
                       {% endfor %}
@@ -73,7 +73,7 @@
         </div>
 
     {% else %}
-  	<form method="POST">
+  	<!-- <form method="POST">
       	{% csrf_token %}
   		<p>Username: <input type="text" name="username"></p>
   		<p>Password: <input type="password" name="password"></p>
@@ -83,7 +83,8 @@
   	<form action="/register/" method="POST">
       	{% csrf_token %}
   		<button name="register" type="submit">Register</button>
-	</form>
+	</form> -->
+    <p> The session has expired. Please click <a href="/">here</a> to login.</p>
     {% endif %}
 
    
