@@ -1,0 +1,13 @@
+body {
+    margin: 15px;
+    padding: 15px;
+    background-image: url("fig1.png");
+}
+
+h1 a {
+    font-family: 'Lobster', cursive;
+}
+
+body p {
+    color: #828282
+}
