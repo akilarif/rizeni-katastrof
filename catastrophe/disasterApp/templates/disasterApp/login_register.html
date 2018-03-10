@@ -8,7 +8,8 @@
   		<button name="log_in" type="submit">Log In</button>
   	</form>
   	<br>
-  	<form action="/register/" method="post">
+  	<form action="/register/" method="POST">
+      	{% csrf_token %}
   		<button name="register" type="submit">Register</button>
 	</form>
     
