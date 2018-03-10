@@ -31,6 +31,7 @@
           <div class="tab-content">
             <div id="nearby_services" class="tab-pane fade in active">
               <h2>Nearby Services</h2>
+              <br>
               {% for service, place in places.items %}
                 {% if service == "hospital" %}
                 <h3>Hospital</h3>
@@ -68,7 +69,7 @@
         </div>
 
     {% else %}
-  	<form method="POST">
+  	<!-- <form method="POST">
       	{% csrf_token %}
   		<p>Username: <input type="text" name="username"></p>
   		<p>Password: <input type="password" name="password"></p>
@@ -78,7 +79,8 @@
   	<form action="/register/" method="POST">
       	{% csrf_token %}
   		<button name="register" type="submit">Register</button>
-	</form>
+	</form> -->
+    <p> The session has expired. Please click <a href="/">here</a> to login.</p>
     {% endif %}
 
   <script>
