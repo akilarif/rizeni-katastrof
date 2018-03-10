@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django import forms
+from disasterApp.models import *
 #from .forms import UserRegistrationForm
 from .forms import SignUpForm
 import urllib.request
 import json
-
+from geopy.geocoders import Nominatim
 
 
 
@@ -16,7 +17,10 @@ def login_register(request):
     return render(request, 'disasterApp/login_register.html', {})
 
 def user_page(request):
-    location = (29.8543, 77.8880)
+    city = Profile.objects.get(user = request.user).location
+    geolocator = Nominatim()
+    location = geolocator.geocode(city)
+    location=(location.latitude, location.longitude)
     location_str = str(location[0]) + "," + str(location[1])
     places = {}
     services = ["hospital", "pharmacy", "police", "atm", "fire_station", "gas_station"]
