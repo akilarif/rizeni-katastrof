@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "disasterApp/layout.html" %}
+
+{% block body %}
     <form method="POST">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+{% endblock %}
