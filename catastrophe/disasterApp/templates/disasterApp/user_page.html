@@ -11,12 +11,22 @@
 
 {% block body %}
     {% if user.is_authenticated %}
-        {% if not user.profile_completed %}
-            
-        {% endif %}
-        <p>hello</p>
-        <p>welcome {{ user.username }}</p>
+        
+        {% for service, place in places.items %}
+            <h3>{{ service }}</h3>
+            <ol>
+                {% for place_tuple in place %}
+                    <li>{% for element in place_tuple %}</li>
+                        <ul>
+                            <li>{{ element }}</li>
+                        </ul>
+                        {% endfor %}
+                {% endfor %}
+            </ol>
+        {% endfor %}
+        
         <form action="/logout/" method="POST">
+            {% csrf_token %}
             <button type = submit>Logout</a></p>
         </form>
     {% else %}
