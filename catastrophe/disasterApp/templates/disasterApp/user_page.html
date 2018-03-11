@@ -18,7 +18,7 @@
         
         <form action="/logout/" method="POST">
             {% csrf_token %}
-            <button type = submit id="button_logout">Logout</button>
+            <button type="submit" id="button_logout">Logout</button>
         </form>
 
         <div class="container">
@@ -26,6 +26,7 @@
             <li class="active"><a href="#nearby_services">Nearby Services</a></li>
             <li><a href="#message_board">Message Board</a></li>
             <li><a href="#donation_board">Donation Board</a></li>
+            <li><a href="#missing_people">Missing People</a></li>
           </ul>
 
           <div class="tab-content">
@@ -64,11 +65,37 @@
             </div>
             <div id="message_board" class="tab-pane fade">
               <h2>Message Board</h2>
-              <p>message</p>
+              <form method="POST">
+                {% csrf_token %}
+                <p>Heading: <input type="text" name="heading"></p>
+                <p>Description: <input type="text" name="description"></p>
+                <button type="submit">Submit</button>
+              </form>
             </div>
             <div id="donation_board" class="tab-pane fade">
               <h2>Donation Board</h2>
-              <p>donation</p>
+              <form method="POST">
+                {% csrf_token %}
+                <p>Items/Services: <input type="text" name="items_services"></p>
+                <p>Location: <input type="text" name="location"></p>
+                <p>Description: <input type="text" name="description"></p>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+            <div id="missing_people" class="tab-pane fade">
+              <h2>Missing People</h2>
+              <form method="POST">
+                {% csrf_token %}
+                <p>Name: <input type="text" name="name"></p>
+                <p>Age: <input type="number" name="age"></p>
+                <p>Gender: 
+                  <input type="radio" name="gender" value="male" checked> Male
+                  <input type="radio" name="gender" value="female"> Female
+                  <input type="radio" name="gender" value="other"> Other 
+                </p>
+                <p>Description: <input type="text" name="description"></p>
+                <button type="submit">Submit</button>
+              </form>
             </div>
           </div>
         </div>
