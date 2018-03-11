@@ -14,14 +14,14 @@ body {
 
 #message_temp {
     background-color: #DCDCDC;
-    border: dotted;
+    border: solid;
     padding: 15px;
     text-align: center;
 }
 
 #donation_temp {
     background-color: #DCDCDC;
-    border: dotted;
+    border: solid;
     padding: 15px;
     text-align: center;
 }
