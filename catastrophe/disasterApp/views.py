@@ -67,6 +67,12 @@ def notifications(request):
 
     return render(request, 'disasterApp/notifications.html', {"notification": notification})
 
+def missing_people(request):
+
+    missing_people = Missing_Person.objects.all()
+
+    return render(request, 'disasterApp/missing_people.html', {"missing_people": missing_people})
+
 
 
 
