@@ -44,8 +44,10 @@ class SignUpForm(UserCreationForm):
     email=forms.EmailField(max_length=256, required=True)
     emergency_contact_name= forms.CharField(max_length=32, required=True)
     emergency_email=forms.EmailField(max_length=256, required=True)
-    
+    emergency_no=forms.CharField(max_length=64)
+    contact_no=forms.CharField(max_length=64)
 
     class Meta:
         model = User
-        fields = ('username','name','gender', 'birth_date','email', 'password1', 'password2', 'location' ,'emergency_contact_name','emergency_email' )
+        fields = ('username','name','gender', 'birth_date','email', 'password1', 'password2', 'location' ,'emergency_contact_name','emergency_email','contact_no','emergency_no' )
+        

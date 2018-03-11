@@ -16,6 +16,8 @@ class Profile(models.Model):
     emergency_contact_name= models.CharField(max_length=32 ,null=True)
     emergency_email=models.EmailField(max_length=256 ,null=True)
     msg=models.CharField(max_length=256, null=True)
+    emergency_no=models.CharField(max_length=64, null=True)
+    contact_no=models.CharField(max_length=64, null=True)
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:

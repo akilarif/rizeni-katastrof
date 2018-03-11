@@ -19,7 +19,7 @@ from geopy.distance import vincenty
 
 from django.contrib.auth.models import User
 from disasterApp.models import Profile
-
+from twilio.rest import Client
 import time
 import datetime
 import urllib.request, json
@@ -30,6 +30,16 @@ import smtplib
 
 period=500#the minutes of period for checking 
 users = Profile.objects.all()
+
+def send_sms(message,number):
+    ACCOUNT_SID = "ACec4f69a49ef14bff4365e048ef68f4a8"
+    AUTH_TOKEN = "fd203c5d95681661e6f198d47c71944d"
+    client = Client(ACCOUNT_SID, AUTH_TOKEN)
+    if(len(number)<10):
+        print("can't send....invalid number")
+    else:
+        client.messages.create(to=number, from_="+18652344561", body=message)
+
 
 def send_email(email,mag,time,source,depth,distance):
     print(email)
@@ -79,9 +89,10 @@ while(True):
             dest=(location.latitude, location.longitude)
             distance=vincenty(source,dest).km
             if(distance<100):
-                 if(u.email!=None):     
+                 if(u.email!=None):
                      send_email(u.email,each_quake["properties"]["mag"],quake_time,source,each_quake["geometry"]["coordinates"][2],distance)
                  body="There was earthquake of "+"magnitude "+str(each_quake["properties"]["mag"])+" at "+str(quake_time)+" at distance of "+str(distance)+"km from your location."
+                 #send_sms(body,u.contact_no)
                  u.msg=body
                  u.save()
         earthquake_data.append(temp_tuple)

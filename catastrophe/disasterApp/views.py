@@ -50,6 +50,8 @@ def register(request):
             user.profile.email=form.cleaned_data.get('email')
             user.profile.emergency_contact=form.cleaned_data.get('emergency_contact')
             user.profile.emergency_email=form.cleaned_data.get('emergency_email')
+            user.profile.contact_no=form.cleaned_data.get('contact_no')
+            user.profile.emergency_no=form.cleaned_data.get('emergency_no')
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
