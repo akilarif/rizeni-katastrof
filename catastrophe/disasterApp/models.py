@@ -24,15 +24,15 @@ def update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
+class Missing_Person(models.Model):
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    Name = models.CharField(max_length=64)
+    Age = models.CharField(max_length=4)
+    Gender=models.TextField(max_length=16)
+    Description=models.TextField(max_length=256)
 
-"""
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    def publish(self):
+        self.save()
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-    
-"""
+    def __str__(self):
+        return self.title
