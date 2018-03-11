@@ -84,18 +84,10 @@
             </div>
             <div id="missing_people" class="tab-pane fade">
               <h2>Missing People</h2>
-              <form method="POST">
-                {% csrf_token %}
-                <p>Name: <input type="text" name="name"></p>
-                <p>Age: <input type="number" name="age"></p>
-                <p>Gender: 
-                  <input type="radio" name="gender" value="male" checked> Male
-                  <input type="radio" name="gender" value="female"> Female
-                  <input type="radio" name="gender" value="other"> Other 
-                </p>
-                <p>Description: <input type="text" name="description"></p>
-                <button type="submit">Submit</button>
-              </form>
+              <<form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
             </div>
           </div>
         </div>

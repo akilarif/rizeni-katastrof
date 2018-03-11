@@ -9,7 +9,7 @@ from .forms import SignUpForm
 import urllib.request
 import json
 from geopy.geocoders import Nominatim
-
+from .forms import Missing_Form
 
 
 # Create your views here.
@@ -17,6 +17,7 @@ def login_register(request):
     return render(request, 'disasterApp/login_register.html', {})
 
 def user_page(request):
+    form=Missing_Form(request.POST)
     city = Profile.objects.get(user = request.user).location
     geolocator = Nominatim()
     location = geolocator.geocode(city)
@@ -35,7 +36,12 @@ def user_page(request):
                 place_tuple = (place_obj["name"], place_obj["vicinity"], place_obj["geometry"]["location"])
                 place.append(place_tuple)
             places[service] = place
-    return render(request, 'disasterApp/user_page.html', {"places": places})
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('/missing_people/')
+    else:
+        return render(request, 'disasterApp/user_page.html', {"places": places,"form":form})
 	
 def register(request):
     if request.method == 'POST':

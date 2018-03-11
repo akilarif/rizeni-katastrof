@@ -29,7 +29,7 @@ class UserRegistrationForm(forms.Form):
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from .models import Missing_Person
 class SignUpForm(UserCreationForm):
     birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
     location = forms.CharField(
@@ -51,3 +51,9 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username','name','gender', 'birth_date','email', 'password1', 'password2', 'location' ,'emergency_contact_name','emergency_email','contact_no','emergency_no' )
         
+        
+class Missing_Form(forms.ModelForm):
+
+    class Meta:
+        model = Missing_Person
+        fields = ('Name', 'Age','Gender','Description')

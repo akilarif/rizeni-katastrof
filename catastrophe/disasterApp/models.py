@@ -18,6 +18,8 @@ class Profile(models.Model):
     msg=models.CharField(max_length=256, null=True)
     emergency_no=models.CharField(max_length=64, null=True)
     contact_no=models.CharField(max_length=64, null=True)
+    def __str__(self):
+        return self.user
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -25,7 +27,6 @@ def update_user_profile(sender, instance, created, **kwargs):
     instance.profile.save()
 
 class Missing_Person(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     Name = models.CharField(max_length=64)
     Age = models.CharField(max_length=4)
     Gender=models.TextField(max_length=16)
@@ -35,4 +36,4 @@ class Missing_Person(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.Name
