@@ -61,6 +61,12 @@ def register(request):
         form = SignUpForm()
     return render(request, 'disasterApp/register.html', {'form': form})
 
+def notifications(request):
+
+    notification = Profile.objects.get(user = request.user).msg
+
+    return render(request, 'disasterApp/notifications.html', {"notification": notification})
+
 
 
 
