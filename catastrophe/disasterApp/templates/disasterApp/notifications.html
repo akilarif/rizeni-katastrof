@@ -1,0 +1,28 @@
+{% extends "disasterApp/layout.html" %}
+
+{% load staticfiles %}
+
+{% block head %}
+    <title>Rizeni Katastrof</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'disasterApp/user_page.css' %}">
+
+{% endblock %}
+
+{% block body %}
+	{% if user.is_authenticated %}
+		<h1 align="center"> Welcome {{user.username}}</h1>
+		<a href="/user_page/" style="float:right">Home&nbsp;</a><br>
+		<h2> Notifications</h2>
+
+		<ul>
+			<li>{{ notification }}</li>
+		</ul>
+	
+	{% else %}
+		<p> The session has expired. Please click <a href="/">here</a> to login.</p>
+
+	{% endif %}
+{% endblock %}

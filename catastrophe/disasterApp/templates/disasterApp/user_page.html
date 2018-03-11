@@ -15,12 +15,20 @@
 
 {% block body %}
     {% if user.is_authenticated %}
+
+      <span class="title">
         
+        <h1 align="center"> Welcome {{user.username}}</h1>
+
         <form action="/logout/" method="POST">
             {% csrf_token %}
             <button type="submit" id="button_logout">Logout</button>
         </form>
 
+        <a href="/notifications/" style="float:right">Notifications&nbsp;</a>
+        <a href="/missing_people/" style="float:right">Missing People&nbsp;</a>
+
+      </span>  
         <div class="container">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#nearby_services">Nearby Services</a></li>
@@ -71,6 +79,22 @@
                 <p>Description: <input type="text" name="description"></p>
                 <button type="submit">Submit</button>
               </form>
+              <br>
+              <br>
+              <div id =message_temp>
+              <ol>
+                <li>Heading: test message for the checking purpose only.</li>
+                <br>
+                <li>Heading: test message for the checking purpose only.</li>
+                <br>
+                <li>Heading: test message for the checking purpose only.</li>
+                <br>
+                <li>Heading: test message for the checking purpose only.</li>
+                <br>
+                <li>Heading: test message for the checking purpose only.</li>
+                <br>
+              </ol>
+              </div>
             </div>
             <div id="donation_board" class="tab-pane fade">
               <h2>Donation Board</h2>
@@ -81,6 +105,22 @@
                 <p>Description: <input type="text" name="description"></p>
                 <button type="submit">Submit</button>
               </form>
+              <br>
+              <br>
+              <div id =donation_temp>
+              <ol>
+                <li>Items/Servies: test message for the checking purpose only.</li>
+                <br>
+                <li>Items/Servies: test message for the checking purpose only.</li>
+                <br>
+                <li>Items/Servies: test message for the checking purpose only.</li>
+                <br>
+                <li>Items/Servies: test message for the checking purpose only.</li>
+                <br>
+                <li>Items/Servies: test message for the checking purpose only.</li>
+                <br>
+              </ol>
+              </div>
             </div>
             <div id="missing_people" class="tab-pane fade">
               <h2>Missing People</h2>
@@ -154,7 +194,7 @@
      
   
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2elfNn2ccUpOz2WQrj81nQM5G3mA8rXo&callback=initMap" async defer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF69n2VyPPLEWUk_Dv3RkI9ZhR1XMQAa4&callback=initMap" async defer>
     </script>
   
 {% endblock %}
