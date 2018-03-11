@@ -18,11 +18,11 @@
 		<h2> Missing People</h2>
 		<ol>
 			{% for missing_person in missing_people %}
-			<li> {{ missing_people.Name}}
+			<li> {{ missing_person.Name}}
 				<ul>
-					<li>Age: {{ missing_people.Age }}</li>
-					<li>Gender: {{ missing_people.Gender }}</li>
-					<li>Description: {{ missing_people.Description }}</li>
+					<li>Age: {{ missing_person.Age }}</li>
+					<li>Gender: {{ missing_person.Gender }}</li>
+					<li>Description: {{ missing_person.Description }}</li>
 				</ul>
 			</li>
 		</ol>
