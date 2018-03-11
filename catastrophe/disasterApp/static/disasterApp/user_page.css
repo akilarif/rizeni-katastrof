@@ -12,4 +12,17 @@ body {
     height: 100%;
 }
 
+#message_temp {
+    background-color: #DCDCDC;
+    border: solid;
+    padding: 15px;
+    text-align: center;
+}
+
+#donation_temp {
+    background-color: #DCDCDC;
+    border: solid;
+    padding: 15px;
+    text-align: center;
+}
 
